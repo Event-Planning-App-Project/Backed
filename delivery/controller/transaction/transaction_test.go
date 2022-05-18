@@ -440,10 +440,10 @@ func TestFinishPayment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/transaction?order_id=order-123")
+		context.SetPath("/transaction?order_id=order-123/finish_payment")
 
 		GetTransaction := NewRepoTrans(&mockTransaction{}, validator.New(), &MockSnap{})
-		GetTransaction.FinishPayment()(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetTransaction.FinishPayment())(context)
 
 		type Response struct {
 			Code    int
@@ -458,7 +458,7 @@ func TestFinishPayment(t *testing.T) {
 		assert.Equal(t, "Success Update Transaction Status", result.Message)
 		assert.True(t, result.Status)
 	})
-	t.Run("Error Cancel Transaction", func(t *testing.T) {
+	t.Run("Error Finish Transaction", func(t *testing.T) {
 		e := echo.New()
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
@@ -466,11 +466,11 @@ func TestFinishPayment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/transaction?order_id=order-123")
+		context.SetPath("/transaction?order_id=order-123/finish_payment")
 
 		GetTransaction := NewRepoTrans(&errMockTransaction{}, validator.New(), &MockSnap{})
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetTransaction.CancelTransaction())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetTransaction.FinishPayment())(context)
 
 		type Response struct {
 			Code    int
@@ -513,7 +513,7 @@ func (m *mockTransaction) CancelTransaction(UserID uint, OrderID string) error {
 }
 
 func (m *mockTransaction) FinishPayment(OrderID string, updateStatus entities.Transaction) (entities.Transaction, error) {
-	return entities.Transaction{OrderID: "Order-1"}, nil
+	return entities.Transaction{UserID: 1, EventID: 1, Name: "Galih", Email: "galih@gmail.com", Phone: "097187888", TotalBill: 120000, PaymentMethod: "BCA", Status: "Success"}, nil
 }
 
 func (m *MockSnap) CreateTransaction(OrderID string, GrossAmt int64) map[string]interface{} {
