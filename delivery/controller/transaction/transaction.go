@@ -6,7 +6,7 @@ import (
 	transV "event/delivery/view/transaction"
 	"event/entities"
 	"event/repository/transaction"
-	"event/utils"
+	"event/utils/midtrans"
 	"fmt"
 	"net/http"
 
@@ -17,11 +17,11 @@ import (
 
 type ControlTrans struct {
 	repo     transaction.RepoTrans
-	midtrans utils.ConfigMidtrans
+	midtrans midtrans.ConfigMidtrans
 	valid    *validator.Validate
 }
 
-func NewRepoTrans(Repo transaction.RepoTrans, validate *validator.Validate, midtrans utils.ConfigMidtrans) *ControlTrans {
+func NewRepoTrans(Repo transaction.RepoTrans, validate *validator.Validate, midtrans midtrans.ConfigMidtrans) *ControlTrans {
 	return &ControlTrans{
 		repo:     Repo,
 		valid:    validate,
@@ -104,7 +104,6 @@ func (t *ControlTrans) PayTransaction() echo.HandlerFunc {
 			Email:         result.Email,
 			Phone:         result.Phone,
 			EventID:       result.EventID,
-			Qty:           result.Qty,
 			TotalBill:     result.TotalBill,
 			PaymentMethod: result.PaymentMethod,
 			Status:        result.Status,
@@ -145,7 +144,6 @@ func (t *ControlTrans) FinishPayment() echo.HandlerFunc {
 			Email:         res.Email,
 			Phone:         res.Phone,
 			EventID:       res.EventID,
-			Qty:           res.Qty,
 			TotalBill:     res.TotalBill,
 			PaymentMethod: res.PaymentMethod,
 			Status:        res.Status,

@@ -8,7 +8,7 @@ type InsertEventRequest struct {
 	Price       int       `json:"price" validate:"required"`
 	Description string    `json:"description" validate:"required"`
 	UrlEvent    string    `json:"urlEvent" validate:"required"`
-	Ticket      int       `json:"ticket" validate:"required"`
+	Kuota       int       `json:"ticket" validate:"required"`
 	DateStart   time.Time `json:"dateStart" validate:"required"`
 	DateEnd     time.Time `json:"dateEnd" validate:"required"`
 	TimeStart   time.Time `json:"timeStart" validate:"required"`

@@ -48,7 +48,6 @@ func (t *TransDB) GetAllTransaction(UserID uint) ([]transaction.AllTrans, error)
 			Email:         v.Email,
 			Phone:         v.Phone,
 			EventID:       v.EventID,
-			Qty:           v.Qty,
 			TotalBill:     v.TotalBill,
 			PaymentMethod: v.PaymentMethod,
 			Status:        v.Status,

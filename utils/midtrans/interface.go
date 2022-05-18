@@ -1,4 +1,4 @@
-package utils
+package midtrans
 
 import "event/delivery/view/transaction"
 

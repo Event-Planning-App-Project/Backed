@@ -1,12 +1,11 @@
 package transaction
 
 type InsertTransaction struct {
-	Name      string `json:"name"`
-	Email     string `json:"email"`
-	Phone     string `json:"phone"`
-	EventID   uint   `json:"event_id"`
-	Qty       int    `json:"qty"`
-	TotalBill int    `json:"totalBill"`
+	Name      string `json:"name" validate:"required"`
+	Email     string `json:"email" validate:"required"`
+	Phone     string `json:"phone" validate:"required"`
+	EventID   uint   `json:"event_id" validate:"required"`
+	TotalBill int    `json:"totalBill" validate:"required"`
 }
 
 type InsertStatusTransaction struct {

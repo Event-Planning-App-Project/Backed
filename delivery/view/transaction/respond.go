@@ -11,7 +11,6 @@ type RespondTransaction struct {
 	Email         string    `json:"email"`
 	Phone         string    `json:"phone"`
 	EventID       uint      `json:"event_id"`
-	Qty           int       `json:"qty"`
 	TotalBill     int       `json:"totalBill"`
 	PaymentMethod string    `json:"paymentMethod"`
 	Status        string    `json:"status"`

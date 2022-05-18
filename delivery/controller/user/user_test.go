@@ -28,11 +28,9 @@ func TestInsertUser(t *testing.T) {
 	t.Run("Success Insert", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"name":     "yani",
-			"email":    "y",
-			"password": "849",
-			"phone":    "77979799",
-			"status":   "starseller",
+			"username": "Galih",
+			"email":    "galih@gmail.com",
+			"password": "23455",
 		})
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON) // Set Content to JSON
@@ -121,10 +119,9 @@ func TestInsertUser(t *testing.T) {
 	t.Run("Error Insert DB", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"name":     "yani",
-			"email":    "y@gmail.com",
-			"password": "849",
-			"phone":    "77979799",
+			"username": "Galih",
+			"email":    "galih@gmail.com",
+			"password": "23455",
 		})
 
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
@@ -671,23 +668,23 @@ func (mur *mockUserRepository) Login(email, password string) (entities.User, err
 type erorrMockUserRepository struct{}
 
 func (emur *erorrMockUserRepository) InsertUser(newPegawai entities.User) (entities.User, error) {
-	return entities.User{}, errors.New("tidak bisa insert data")
+	return entities.User{}, errors.New("Database Access Error")
 }
 func (emur *erorrMockUserRepository) GetAllUser() ([]entities.User, error) {
-	return nil, errors.New("tidak bisa select data")
+	return nil, errors.New("Database Access Error")
 }
 
 func (emur *erorrMockUserRepository) DeleteUser(ID int) (entities.User, error) {
-	return entities.User{}, errors.New("tidak bisa select data")
+	return entities.User{}, errors.New("Database Access Error")
 }
 
 func (emur *erorrMockUserRepository) GetUserID(ID int) (entities.User, error) {
-	return entities.User{}, errors.New("tidak bisa select data")
+	return entities.User{}, errors.New("Database Access Error")
 }
 
 func (emur *erorrMockUserRepository) Login(email, password string) (entities.User, error) {
-	return entities.User{}, errors.New("tidak bisa select data")
+	return entities.User{}, errors.New("Database Access Error")
 }
 func (emur *erorrMockUserRepository) UpdateUser(ID int, update entities.User) (entities.User, error) {
-	return entities.User{}, errors.New("tidak bisa select data")
+	return entities.User{}, errors.New("Database Access Error")
 }

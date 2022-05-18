@@ -31,7 +31,11 @@ func TestCreateTransaction(t *testing.T) {
 	t.Run("Create Success", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"address": "Pagar Alam",
+			"name":      "user",
+			"email":     "user@gmail.com",
+			"phone":     "123456",
+			"event_id":  1,
+			"totalBill": 30000,
 		})
 
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
@@ -63,7 +67,11 @@ func TestCreateTransaction(t *testing.T) {
 	t.Run("Error Access Database", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"address": "Pagar Alam",
+			"name":      "user",
+			"email":     "user@gmail.com",
+			"phone":     "123456",
+			"event_id":  1,
+			"totalBill": 30000,
 		})
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
@@ -90,7 +98,7 @@ func TestCreateTransaction(t *testing.T) {
 	})
 	t.Run("Error Bind", func(t *testing.T) {
 		e := echo.New()
-		requestBody := "Jalan Gunung"
+		requestBody := "Error Access"
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(requestBody))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
@@ -116,7 +124,10 @@ func TestCreateTransaction(t *testing.T) {
 	t.Run("Error Validate", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"baju": "8787",
+			"name":     "user",
+			"email":    "user@gmail.com",
+			"phone":    "123456",
+			"event_id": 1,
 		})
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
@@ -144,7 +155,11 @@ func TestCreateTransaction(t *testing.T) {
 	t.Run("Error Get URL Snap", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"address": "Pagar Alam",
+			"name":      "user",
+			"email":     "user@gmail.com",
+			"phone":     "123456",
+			"event_id":  1,
+			"totalBill": 30000,
 		})
 
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
