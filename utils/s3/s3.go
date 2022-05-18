@@ -27,7 +27,6 @@ func upload(c echo.Context) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return result, nil
 }
 
