@@ -10,7 +10,9 @@ import (
 	controllercomm "event/delivery/controller/comment"
 	comRepo "event/repository/comment"
 
+	controllerevent "event/delivery/controller/event"
 	"event/delivery/routes"
+	"event/repository/event"
 
 	cTrans "event/delivery/controller/transaction"
 
@@ -36,16 +38,17 @@ func main() {
 	comRepo := comRepo.NewDB(database)
 	commControl := controllercomm.NewControlComment(comRepo, validator.New())
 
-	// Initiate Echo
+	eveRepo := event.NewDB(database)
+	eventtControl := controllerevent.NewControlEvent(eveRepo, validator.New())
 
 	// Send Access DB to Transaction
 	snap := midtrans.InitMidtrans()
+
 	transRepo := transaction.NewTransDB(database)
 	transControl := cTrans.NewRepoTrans(transRepo, validator.New(), snap)
-
 	// Initiate Echo
 	e := echo.New()
 	// Akses Path Addressss
-	routes.Path(e, userControl, transControl, categoryControl, commControl)
+	routes.Path(e, userControl, transControl, categoryControl, commControl, eventtControl)
 	e.Logger.Fatal(e.Start(":8000"))
 }

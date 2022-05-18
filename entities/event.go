@@ -1,25 +1,22 @@
 package entities
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
 type Event struct {
 	gorm.Model
-	UserID      uint          `json:"user_id"`
-	CategoryID  uint          `json:"category_id"`
-	Name        string        `json:"name"`
-	Promotor    string        `json:"promotor"`
-	Price       int           `json:"price"`
-	Description string        `json:"description"`
-	UrlEvent    string        `json:"urlEvent"`
-	Ticket      int           `json:"ticket"`
-	DateStart   time.Time     `json:"dateStart"`
-	DateEnd     time.Time     `json:"dateEnd"`
-	TimeStart   time.Time     `json:"timeStart"`
-	TimeEnd     time.Time     `json:"timeEnd"`
-	Comment     []Comment     `gorm:"foreignKey:EventID;references:id"`
-	Transaction []Transaction `gorm:"foreignKey:EventID;references:id"`
+	UserID      uint      `json:"user_id"`
+	CategoryID  uint      `json:"category_id"`
+	Name        string    `json:"name"`
+	Promotor    string    `json:"promotor"`
+	Price       int       `json:"price"`
+	Description string    `json:"description"`
+	UrlEvent    string    `json:"urlEvent"`
+	Quota       int       `json:"quota"`
+	DateStart   string    `json:"dateStart"`
+	DateEnd     string    `json:"dateEnd"`
+	TimeStart   string    `json:"timeStart"`
+	TimeEnd     string    `json:"timeEnd"`
+	Comment     []Comment `gorm:"foreignKey:EventID;references:id"`
 }

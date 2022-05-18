@@ -20,7 +20,7 @@ import (
 
 func TestCreateToken(t *testing.T) {
 	t.Run("Create Token", func(t *testing.T) {
-		token, _ = middlewares.CreateToken(3, "Yani", "y@gmail.com")
+		token, _ = middlewares.CreateToken(3, "user", "user@gmail.com")
 	})
 }
 
@@ -372,8 +372,8 @@ func TestUpdateUserID(t *testing.T) {
 		var result Response
 		json.Unmarshal([]byte(res.Body.Bytes()), &result)
 
-		assert.Equal(t, 500, result.Code)
-		assert.Equal(t, "Cannot Access Database", result.Message)
+		assert.Equal(t, 404, result.Code)
+		assert.Equal(t, "Data Not Found", result.Message)
 		assert.False(t, result.Status)
 	})
 	t.Run("Error Not Found Access Token", func(t *testing.T) {

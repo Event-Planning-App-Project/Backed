@@ -106,12 +106,7 @@ func (uc *UserController) UpdateUserID() echo.HandlerFunc {
 
 		if err != nil {
 			log.Warn(err)
-			notFound := "data tidak ditemukan"
-			if err.Error() == notFound {
-				return c.JSON(http.StatusNotFound, view.NotFound())
-			}
-			return c.JSON(http.StatusInternalServerError, view.InternalServerError())
-
+			return c.JSON(http.StatusNotFound, view.NotFound())
 		}
 		response := userview.RespondUser{Username: res.Username, Email: res.Email, UserID: res.ID}
 

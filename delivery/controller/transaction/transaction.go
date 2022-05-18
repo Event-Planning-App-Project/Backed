@@ -136,7 +136,7 @@ func (t *ControlTrans) FinishPayment() echo.HandlerFunc {
 		res, err := t.repo.FinishPayment(order, trans)
 		if err != nil {
 			log.Warn(err)
-			c.JSON(http.StatusInternalServerError, view.InternalServerError())
+			return c.JSON(http.StatusInternalServerError, view.InternalServerError())
 		}
 		result := transV.RespondTransaction{
 			OrderID:       res.OrderID,
