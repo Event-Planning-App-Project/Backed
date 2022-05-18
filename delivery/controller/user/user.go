@@ -40,7 +40,7 @@ func (uc *UserController) InsertUser() echo.HandlerFunc {
 			return c.JSON(http.StatusNotAcceptable, view.Validate())
 		}
 
-		newUser := entities.User{Email: tmpUser.Email, Password: tmpUser.Password}
+		newUser := entities.User{Email: tmpUser.Email, Username: tmpUser.Username, Password: tmpUser.Password}
 		res, err := uc.Repo.InsertUser(newUser)
 
 		if err != nil {
