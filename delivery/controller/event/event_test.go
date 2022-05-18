@@ -1,4 +1,4 @@
-package comment
+package event
 
 import (
 	"encoding/json"
@@ -25,12 +25,21 @@ func TestCreateToken(t *testing.T) {
 	})
 }
 
-func TestCreateComment(t *testing.T) {
+func TestCreateEvent(t *testing.T) {
 	t.Run("Create Success", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"event_id": 1,
-			"comment":  "woow, amazing",
+			"category_id": 1,
+			"name":        "Kahitna Live Music",
+			"promotor":    "j Entertaiment",
+			"price":       120000,
+			"description": "live music",
+			"urlEvent":    "yiyyiuiuiu",
+			"quota":       100,
+			"dateStart":   "2022-05-18",
+			"dateEnd":     "2022-05-29",
+			"timeStart":   "17.00",
+			"timeEnd":     "21.00",
 		})
 
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
@@ -39,10 +48,10 @@ func TestCreateComment(t *testing.T) {
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment")
-		commentC := NewControlComment(&mockComment{}, validator.New())
+		context.SetPath("/event")
+		eventC := NewControlEvent(&mockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(commentC.CreateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(eventC.CreateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -62,18 +71,27 @@ func TestCreateComment(t *testing.T) {
 	t.Run("Error Access Database", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"event_id": 1,
-			"comment":  "woow, amazing",
+			"category_id": 1,
+			"name":        "Kahitna Live Music",
+			"promotor":    "j Entertaiment",
+			"price":       120000,
+			"description": "live music",
+			"urlEvent":    "yiyyiuiuiu",
+			"quota":       100,
+			"dateStart":   "2022-05-18",
+			"dateEnd":     "2022-05-29",
+			"timeStart":   "17.00",
+			"timeEnd":     "21.00",
 		})
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment")
-		commentC := NewControlComment(&errMockComment{}, validator.New())
+		context.SetPath("/event")
+		eventC := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(commentC.CreateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(eventC.CreateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -98,10 +116,10 @@ func TestCreateComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment")
-		commentC := NewControlComment(&errMockComment{}, validator.New())
+		context.SetPath("/event")
+		eventC := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(commentC.CreateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(eventC.CreateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -118,8 +136,16 @@ func TestCreateComment(t *testing.T) {
 	t.Run("Error Validate", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-
-			"comment": "woow, amazing",
+			"name":        "Kahitna Live Music",
+			"promotor":    "j Entertaiment",
+			"price":       120000,
+			"description": "live music",
+			"url_event":   "yiyyiuiuiu",
+			"quota":       100,
+			"dateStart":   "2022-05-18",
+			"dateEnd":     "2022-05-29",
+			"timeStart":   "17.00",
+			"timeEnd":     "21.00",
 		})
 
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
@@ -127,10 +153,10 @@ func TestCreateComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/category")
-		commentC := NewControlComment(&errMockComment{}, validator.New())
+		context.SetPath("/event")
+		eventC := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(commentC.CreateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(eventC.CreateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -147,8 +173,8 @@ func TestCreateComment(t *testing.T) {
 	})
 }
 
-func TestGetAllComment(t *testing.T) {
-	t.Run("Success Get All Comment", func(t *testing.T) {
+func TestGetAllEvent(t *testing.T) {
+	t.Run("Success Get All Event", func(t *testing.T) {
 		e := echo.New()
 
 		req := httptest.NewRequest(http.MethodPost, "/", nil)
@@ -156,10 +182,10 @@ func TestGetAllComment(t *testing.T) {
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment")
-		Getcomment := NewControlComment(&mockComment{}, validator.New())
+		context.SetPath("/event")
+		Getevent := NewControlEvent(&mockEvent{}, validator.New())
 
-		Getcomment.GetAllComment()(context)
+		Getevent.GetAllEvent()(context)
 
 		type Response struct {
 			Code    int
@@ -172,7 +198,7 @@ func TestGetAllComment(t *testing.T) {
 		json.Unmarshal([]byte(res.Body.Bytes()), &result)
 
 		assert.Equal(t, 200, result.Code)
-		assert.Equal(t, "Success Get All data", result.Message)
+		assert.Equal(t, "Success Get All Data", result.Message)
 		assert.True(t, result.Status)
 		assert.NotNil(t, result.Data)
 	})
@@ -184,10 +210,10 @@ func TestGetAllComment(t *testing.T) {
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment")
-		Getcomment := NewControlComment(&errMockComment{}, validator.New())
+		context.SetPath("/event")
+		Getevent := NewControlEvent(&errMockEvent{}, validator.New())
 
-		Getcomment.GetAllComment()(context)
+		Getevent.GetAllEvent()(context)
 
 		type Response struct {
 			Code    int
@@ -204,20 +230,20 @@ func TestGetAllComment(t *testing.T) {
 	})
 }
 
-func TestGetCommentID(t *testing.T) {
-	t.Run("Success Get Comment By ID", func(t *testing.T) {
+func TestGetEventID(t *testing.T) {
+	t.Run("Success Get Event By ID", func(t *testing.T) {
 		e := echo.New()
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("1")
-		GetComment := NewControlComment(&mockComment{}, validator.New())
+		GetEvent := NewControlEvent(&mockEvent{}, validator.New())
 
-		GetComment.GetCommentID()(context)
+		GetEvent.GetEventID()(context)
 
 		type Response struct {
 			Code    int
@@ -230,7 +256,7 @@ func TestGetCommentID(t *testing.T) {
 
 		json.Unmarshal([]byte(res.Body.Bytes()), &result)
 		assert.Equal(t, 200, result.Code)
-		assert.Equal(t, "Success Get Data ID", result.Message)
+		assert.Equal(t, "Success Get Data", result.Message)
 		assert.True(t, result.Status)
 		assert.NotNil(t, result.Data)
 	})
@@ -242,12 +268,12 @@ func TestGetCommentID(t *testing.T) {
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("1")
-		GetCom := NewControlComment(&errMockComment{}, validator.New())
+		GetEv := NewControlEvent(&errMockEvent{}, validator.New())
 
-		GetCom.GetCommentID()(context)
+		GetEv.GetEventID()(context)
 
 		type Response struct {
 			Code    int
@@ -270,12 +296,12 @@ func TestGetCommentID(t *testing.T) {
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("C")
-		GetCom := NewControlComment(&errMockComment{}, validator.New())
+		GetEvent := NewControlEvent(&errMockEvent{}, validator.New())
 
-		GetCom.GetCommentID()(context)
+		GetEvent.GetEventID()(context)
 
 		type Response struct {
 			Code    int
@@ -292,23 +318,33 @@ func TestGetCommentID(t *testing.T) {
 	})
 }
 
-func TestUpdateComment(t *testing.T) {
+func TestUpdateEvent(t *testing.T) {
 	t.Run("Update Success", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
-			"name": "kecantikan",
+
+			"name":        "Kahitna Live Music",
+			"promotor":    "j Entertaiment",
+			"price":       120000,
+			"description": "live music",
+			"url_event":   "yiyyiuiuiu",
+			"quota":       100,
+			"dateStart":   "2022-05-18",
+			"dateEnd":     "2022-05-29",
+			"timeStart":   "17.00",
+			"timeEnd":     "21.00",
 		})
 		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("1")
-		GetCom := NewControlComment(&mockComment{}, validator.New())
+		GetEvent := NewControlEvent(&mockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetCom.UpdateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetEvent.UpdateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -333,12 +369,12 @@ func TestUpdateComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("7")
-		GetCom := NewControlComment(&errMockComment{}, validator.New())
+		GetEv := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetCom.UpdateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetEv.UpdateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -361,12 +397,12 @@ func TestUpdateComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("7")
-		comment := NewControlComment(&errMockComment{}, validator.New())
+		event := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(comment.UpdateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(event.UpdateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -388,12 +424,12 @@ func TestUpdateComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("C")
-		Getcomment := NewControlComment(&errMockComment{}, validator.New())
+		GetEvent := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(Getcomment.UpdateComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetEvent.UpdateEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -410,8 +446,8 @@ func TestUpdateComment(t *testing.T) {
 	})
 }
 
-func TestDeleteComment(t *testing.T) {
-	t.Run("Success Delete Comment", func(t *testing.T) {
+func TestDelete(t *testing.T) {
+	t.Run("Success Delete Event", func(t *testing.T) {
 		e := echo.New()
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
@@ -419,12 +455,12 @@ func TestDeleteComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("7")
-		GetCom := NewControlComment(&mockComment{}, validator.New())
+		GetEv := NewControlEvent(&mockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetCom.DeleteComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetEv.DeleteEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -439,7 +475,7 @@ func TestDeleteComment(t *testing.T) {
 		assert.Equal(t, "Deleted", result.Message)
 		assert.True(t, result.Status)
 	})
-	t.Run("Error Delete Comment", func(t *testing.T) {
+	t.Run("Error Delete Event", func(t *testing.T) {
 		e := echo.New()
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
@@ -447,12 +483,12 @@ func TestDeleteComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("7")
-		GetComment := NewControlComment(&errMockComment{}, validator.New())
+		GetEvent := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetComment.DeleteComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetEvent.DeleteEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -475,12 +511,12 @@ func TestDeleteComment(t *testing.T) {
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/comment/:id")
+		context.SetPath("/event/:id")
 		context.SetParamNames("id")
 		context.SetParamValues("C")
-		Getcom := NewControlComment(&errMockComment{}, validator.New())
+		Getev := NewControlEvent(&errMockEvent{}, validator.New())
 
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(Getcom.DeleteComment())(context)
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(Getev.DeleteEvent())(context)
 
 		type Response struct {
 			Code    int
@@ -497,44 +533,44 @@ func TestDeleteComment(t *testing.T) {
 	})
 }
 
-type mockComment struct{}
+type mockEvent struct{}
 
-func (c *mockComment) CreateCom(newAdd entities.Comment) (entities.Comment, error) {
-	return entities.Comment{Comment: "Woooo, amazinggg"}, nil
+func (c *mockEvent) CreateEvent(newAdd entities.Event) (entities.Event, error) {
+	return entities.Event{UserID: 1, CategoryID: 1, Name: "Kahitna Concert", Promotor: "J Entertaiment", Price: 200000, Description: "live music", UrlEvent: "6gghgh", Quota: 100, DateStart: "2022-05-18", DateEnd: "2022-05-29", TimeStart: "17.00", TimeEnd: "21.00"}, nil
 }
-func (c *mockComment) GetAllCom() ([]entities.Comment, error) {
-	return []entities.Comment{{Comment: "Woooo, amazinggg"}}, nil
+func (c *mockEvent) GetAllEvent() ([]entities.Event, error) {
+	return []entities.Event{{UserID: 1, CategoryID: 1, Name: "Kahitna Concert", Promotor: "J Entertaiment", Price: 200000, Description: "live music", UrlEvent: "6gghgh", Quota: 100, DateStart: "2022-05-18", DateEnd: "2022-05-29", TimeStart: "17.00", TimeEnd: "21.00"}}, nil
 }
-func (c *mockComment) GetCommentID(id uint) (entities.Comment, error) {
-	return entities.Comment{Comment: "Woooo, amazinggg"}, nil
+func (c *mockEvent) GetEventID(id uint) (entities.Event, error) {
+	return entities.Event{UserID: 1, CategoryID: 1, Name: "Kahitna Concert", Promotor: "J Entertaiment", Price: 200000, Description: "live music", UrlEvent: "6gghgh", Quota: 100, DateStart: "2022-05-18", DateEnd: "2022-05-29", TimeStart: "17.00", TimeEnd: "21.00"}, nil
 }
-func (c *mockComment) UpdateComment(id uint, UpdateComment entities.Comment, UserID uint) (entities.Comment, error) {
-	return entities.Comment{Comment: "Woooo, amazinggg"}, nil
+func (c *mockEvent) UpdateEvent(id uint, UpdateEvent entities.Event, UserID uint) (entities.Event, error) {
+	return entities.Event{UserID: 1, CategoryID: 1, Name: "Kahitna Concert", Promotor: "J Entertaiment", Price: 200000, Description: "live music", UrlEvent: "6gghgh", Quota: 100, DateStart: "2022-05-18", DateEnd: "2022-05-29", TimeStart: "17.00", TimeEnd: "21.00"}, nil
 }
-func (c *mockComment) DeleteComment(id uint, UserID uint) error {
+func (c *mockEvent) DeleteEvent(id uint, UserID uint) error {
 	return nil
 }
 
-type errMockComment struct {
+type errMockEvent struct {
 }
 
 // METHOD MOCK ERROR
-func (e *errMockComment) CreateCom(newAdd entities.Comment) (entities.Comment, error) {
-	return entities.Comment{}, errors.New("Access Database Error")
+func (e *errMockEvent) CreateEvent(newAdd entities.Event) (entities.Event, error) {
+	return entities.Event{}, errors.New("Access Database Error")
 }
 
-func (e *errMockComment) GetAllCom() ([]entities.Comment, error) {
+func (e *errMockEvent) GetAllEvent() ([]entities.Event, error) {
 	return nil, errors.New("Access Database Error")
 }
 
-func (e *errMockComment) GetCommentID(id uint) (entities.Comment, error) {
-	return entities.Comment{}, errors.New("Access Database Error")
+func (e *errMockEvent) GetEventID(id uint) (entities.Event, error) {
+	return entities.Event{}, errors.New("Access Database Error")
 }
 
-func (e *errMockComment) UpdateComment(id uint, UpdateCom entities.Comment, UserID uint) (entities.Comment, error) {
-	return entities.Comment{}, errors.New("Access Database Error")
+func (e *errMockEvent) UpdateEvent(id uint, UpdateEvent entities.Event, UserID uint) (entities.Event, error) {
+	return entities.Event{}, errors.New("Access Database Error")
 }
 
-func (e *errMockComment) DeleteComment(id uint, UserID uint) error {
+func (e *errMockEvent) DeleteEvent(id uint, UserID uint) error {
 	return errors.New("Access Database Error")
 }

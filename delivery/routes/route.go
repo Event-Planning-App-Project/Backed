@@ -3,6 +3,7 @@ package routes
 import (
 	"event/delivery/controller/category"
 	"event/delivery/controller/comment"
+	"event/delivery/controller/event"
 
 	"event/delivery/controller/transaction"
 	"event/delivery/controller/user"
@@ -11,7 +12,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, cat category.CategoryControl, co comment.CommentControll) {
+func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, cat category.CategoryControl, co comment.CommentControll, ev event.EventControll) {
 
 	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.Logger())
@@ -39,6 +40,13 @@ func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, ca
 	comment.POST("", co.CreateComment(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
 	comment.GET("", co.GetAllComment())
 	comment.GET("/:id", co.GetCommentID())
+
+	event := e.Group("/event")
+	event.PUT("/:id", ev.UpdateEvent(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
+	event.DELETE("/:id", ev.DeleteEvent(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
+	event.POST("", ev.CreateEvent(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
+	event.GET("", ev.GetAllEvent())
+	event.GET("/:id", ev.GetEventID())
 
 	// ROUTES TRANSACTION
 	Transaction := e.Group("/transaction")

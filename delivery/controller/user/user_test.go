@@ -20,7 +20,7 @@ import (
 
 func TestCreateToken(t *testing.T) {
 	t.Run("Create Token", func(t *testing.T) {
-		token, _ = middlewares.CreateToken(3, "Yani", "y@gmail.com")
+		token, _ = middlewares.CreateToken(3, "user", "user@gmail.com")
 	})
 }
 

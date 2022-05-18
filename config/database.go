@@ -19,6 +19,7 @@ func InitDB() *gorm.DB {
 		config.DB_Port,
 		config.Name,
 	)
+
 	db, err := gorm.Open(mysql.Open(conString), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err.Error())

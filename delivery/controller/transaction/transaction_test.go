@@ -513,7 +513,7 @@ func (m *mockTransaction) CancelTransaction(UserID uint, OrderID string) error {
 }
 
 func (m *mockTransaction) FinishPayment(OrderID string, updateStatus entities.Transaction) (entities.Transaction, error) {
-	return entities.Transaction{OrderID: "Order-1"}, nil
+	return entities.Transaction{UserID: 1, EventID: 1, Name: "Galih", Email: "galih@gmail.com", Phone: "097187888", TotalBill: 120000, PaymentMethod: "BCA", Status: "Success"}, nil
 }
 
 func (m *MockSnap) CreateTransaction(OrderID string, GrossAmt int64) map[string]interface{} {
