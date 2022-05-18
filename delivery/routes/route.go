@@ -2,7 +2,8 @@ package routes
 
 import (
 	"event/delivery/controller/category"
-	"event/delivery/controller/product"
+	"event/delivery/controller/comment"
+
 	"event/delivery/controller/transaction"
 	"event/delivery/controller/user"
 
@@ -10,7 +11,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, cat category.CategoryControl, p product.ProductControl) {
+func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, cat category.CategoryControl, co comment.CommentControll) {
 
 	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.Logger())
@@ -32,14 +33,12 @@ func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, ca
 	category.GET("", cat.GetAllCategory())
 	category.GET("/:id", cat.GetCategoryID())
 
-	product := e.Group("/product")
-	product.POST("", p.InsertProd(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
-	product.GET("", p.GetAllProduct())
-	product.GET("/:id", p.GetProID())
-	product.PUT("/:id", p.UpdateProduk(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
-	product.DELETE("/:id", p.DeleteProduk(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
-	product.GET("/user/:id", p.GetProdukbySeller())
-	product.GET("/category/:id", p.GetProdukByCategory())
+	comment := e.Group("/comment")
+	comment.PUT("/:id", co.UpdateComment(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
+	comment.DELETE("/:id", co.DeleteComment(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
+	comment.POST("", co.CreateComment(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
+	comment.GET("", co.GetAllComment())
+	comment.GET("/:id", co.GetCommentID())
 
 	// ROUTES TRANSACTION
 	Transaction := e.Group("/transaction")
