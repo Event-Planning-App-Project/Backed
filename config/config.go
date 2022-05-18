@@ -6,13 +6,17 @@ import (
 )
 
 type AppConfig struct {
-	Port     int
-	Driver   string
-	Name     string
-	Address  string
-	DB_Port  int
-	Username string
-	Password string
+	Port          int
+	Driver        string
+	Name          string
+	Address       string
+	DB_Port       int
+	Username      string
+	Password      string
+	TokenMidtrans string
+	KeyIDs3       string
+	AccessKeyS3   string
+	MyRegion      string
 }
 
 var appConfig *AppConfig
@@ -35,7 +39,10 @@ func initConfig() *AppConfig {
 	defaultConfig.DB_Port = 3306
 	defaultConfig.Username = getEnv("USERNAME", "root")
 	defaultConfig.Password = getEnv("PASSWORD", "")
-
+	defaultConfig.TokenMidtrans = getEnv("TOKENMIDTRANS", "")
+	defaultConfig.KeyIDs3 = getEnv("KEYIDS3", "")
+	defaultConfig.AccessKeyS3 = getEnv("ACCESSKEYS3", "")
+	defaultConfig.MyRegion = getEnv("MYREGION", "")
 	return &defaultConfig
 }
 
