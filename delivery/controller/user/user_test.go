@@ -372,8 +372,8 @@ func TestUpdateUserID(t *testing.T) {
 		var result Response
 		json.Unmarshal([]byte(res.Body.Bytes()), &result)
 
-		assert.Equal(t, 500, result.Code)
-		assert.Equal(t, "Cannot Access Database", result.Message)
+		assert.Equal(t, 404, result.Code)
+		assert.Equal(t, "Data Not Found", result.Message)
 		assert.False(t, result.Status)
 	})
 	t.Run("Error Not Found Access Token", func(t *testing.T) {

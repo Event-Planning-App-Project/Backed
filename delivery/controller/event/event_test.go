@@ -64,7 +64,7 @@ func TestCreateEvent(t *testing.T) {
 		json.Unmarshal([]byte(res.Body.Bytes()), &result)
 
 		assert.Equal(t, 201, result.Code)
-		assert.Equal(t, "Success Create Comment", result.Message)
+		assert.Equal(t, "Success Create Event", result.Message)
 		assert.True(t, result.Status)
 		assert.NotNil(t, result.Data)
 	})
