@@ -125,7 +125,7 @@ Ensure Golang and mySQL have been installed on your device
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Push your contribution to the new branch If you have suggestions for development of this project. Thank you 😊
+Push your contribution to new branch If you have suggestions for development of this project. Thank you 😊
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
