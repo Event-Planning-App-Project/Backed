@@ -43,7 +43,14 @@ func (t *ControlTrans) CreateTransaction() echo.HandlerFunc {
 		}
 		UserID := middlewares.ExtractTokenUserId(c)
 
-		NewTransaction := entities.Transaction{UserID: uint(UserID), Name: InsertTransaction.Name}
+		NewTransaction := entities.Transaction{
+			UserID:    uint(UserID),
+			Name:      InsertTransaction.Name,
+			Email:     InsertTransaction.Email,
+			Phone:     InsertTransaction.Phone,
+			EventID:   InsertTransaction.EventID,
+			TotalBill: InsertTransaction.TotalBill,
+		}
 		fmt.Println(NewTransaction)
 		result, err := t.repo.CreateTransaction(NewTransaction)
 		if err != nil {

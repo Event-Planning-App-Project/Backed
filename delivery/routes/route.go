@@ -7,6 +7,8 @@ import (
 
 	"event/delivery/controller/transaction"
 	"event/delivery/controller/user"
+	"event/utils/midtrans"
+	"event/utils/s3"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -56,4 +58,6 @@ func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, ca
 	Transaction.POST("/:order_id/pay", t.PayTransaction(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
 	Transaction.POST("/:order_id/cancel", t.CancelTransaction(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
 	Transaction.GET("/:order_id/finish_payment", t.FinishPayment())
+	Transaction.GET("/finishpayment", midtrans.PayOk())
+	e.POST("/upload", s3.Upload())
 }
