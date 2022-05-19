@@ -4,6 +4,7 @@
 <br />
 <div align="center">
  <img src="https://media.giphy.com/media/VPBWxMxTH1VPIp8ogj/giphy.gif" width="250" height="250"/>
+ 
  </div>
  
 
@@ -14,14 +15,7 @@
     <br />
     <a href="https://github.com/Event-Planning-App-Project/Backend.git"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/Event-Planning-App-Project/Backend.git">View Demo</a>
-    ·
-    <a href="https://github.com/Event-Planning-App-Project/Backend.git/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/Event-Planning-App-Project/Backend.git/issues">Request Feature</a>
-  </p>
-</div>
+  </div>
 
 
 
@@ -32,7 +26,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Build App & Database</a></li>
       </ul>
     </li>
     <li>
@@ -41,7 +35,6 @@
        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -56,8 +49,8 @@
 This project is a collaborative project between Backend and Frontend in Immersive Alterra Batch 8 Boothcamp. However, this repo specifically contains cases which have accomplished by Backend's team.
 Description about this project can be read at the following link --> [Project Description](https://docs.google.com/document/d/1mb8QTb7J77r6rzJwned63H-IVdV20v12ugN365ET9tg/edit).
 This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https://github.com/astutirahmawati). The things that Backend's team has done such as:
-* Resolving Entity Relation Design (ERD)'s together
-* Resolving OPEN API's carried out by division of tasks
+* Designing Entity Relation Design (ERD)'s together
+* Finishing OPEN API's carried out by division of tasks
 * Resolving from coding endpoint to unit test's carried out by division of tasks
 * Deployment
 
@@ -77,18 +70,14 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 ![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
 ![Ubuntu](https://img.shields.io/badge/-Ubuntu-05122A?style=flat&logo=ubuntu)&nbsp;
 ![Midtrans](https://img.shields.io/badge/-Midtrans-05122A?style=flat&logo=midtrans)&nbsp;
-![Codacy](https://img.shields.io/badge/-Codacy-05122A?style=flat&logo=codacy)&nbsp;
-![CloudFlare](https://img.shields.io/badge/-CloudFlare-05122A?style=flat&logo=cloudflare)&nbsp;
 ![Google Maps Platform](https://img.shields.io/badge/-Google_Maps_Platform-05122A?style=flat&logo=google)&nbsp;
 ![JWT](https://img.shields.io/badge/-JWT-05122A?style=flat&logo=jwt)&nbsp;
 ![Swagger](https://img.shields.io/badge/-Swagger-05122A?style=flat&logo=swagger)&nbsp;
-![Lucid Chart](https://img.shields.io/badge/-Lucid_Chart-05122A?style=flat&logo=lucidchart)&nbsp;
 
-<img src="images/techstack.png">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -117,16 +106,6 @@ Ensure Golang and mySQL have been installed on your device
  <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-Simulation Apps With Free API  [https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0](https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0)
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -142,10 +121,17 @@ Push your contribution to the new branch If you have suggestions for development
 
 <!-- CONTACT -->
 ## Contact
-* Galih - [https://github.com/galihgpr](https://github.com/galihgpr) 
-* Astuti - [https://github.com/astutirahmawati](https://github.com/astutirahmawati) 
 
-Project Link: [https://github.com/Event-Planning-App-Project/Backend](https://github.com/Event-Planning-App-Project/Backend.git)
+Project Repository Link :  [https://github.com/Event-Planning-App-Project/Backend](https://github.com/Event-Planning-App-Project/Backend.git)<br/>
+Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0](https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0)
+
+<!-- :heart: -->
+<!-- CONTRIBUTOR -->
+
+:star2:Contributor :
+<br>
+* [Galih](https://github.com/galihgpr)
+* [Astuti](https://github.com/astutirahmawati)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -160,3 +146,7 @@ We are very grateful for suggestion and encouragement from mentors and frontend'
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+<h3>
+<p align="center">:copyright: 2022 | Immersive ALTA Batch 8 </p>
+</h3>
+<!-- end -->
