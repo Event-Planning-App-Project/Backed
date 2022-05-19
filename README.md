@@ -70,7 +70,6 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 ![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
 ![Ubuntu](https://img.shields.io/badge/-Ubuntu-05122A?style=flat&logo=ubuntu)&nbsp;
 ![Midtrans](https://img.shields.io/badge/-Midtrans-05122A?style=flat&logo=midtrans)&nbsp;
-![Google Maps Platform](https://img.shields.io/badge/-Google_Maps_Platform-05122A?style=flat&logo=google)&nbsp;
 ![JWT](https://img.shields.io/badge/-JWT-05122A?style=flat&logo=jwt)&nbsp;
 ![Swagger](https://img.shields.io/badge/-Swagger-05122A?style=flat&logo=swagger)&nbsp;
 
@@ -78,6 +77,23 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+### :star2:&nbsp;List of Features
+
+| No.| Endpoint        | Description                                                            |
+| :- | :------------- | :--------------------------------------------------------------------- |
+| 1. | Register       | Create new account  |
+| 2. | Login          | Authentication process  |
+| 3. | User     | Read & update profile user|
+|     |          | Non activate account  | 
+| 4. | Comment   | create, read, update, and delete comment  |
+| 5. | Event| create, read, update, and delete event   |
+| 6. | Transaction| create, read, update, and delete order |
+|  | | Create and choose payment method |
+
+
+### :star2:&nbsp;ERD
+
+![ERD](https://github.com/Event-Planning-App-Project/Backend/blob/main/ERD_EVENT.png)
 
 <!-- GETTING STARTED -->
 ## Getting Started
