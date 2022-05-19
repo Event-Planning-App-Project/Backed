@@ -113,7 +113,7 @@ Simulation Apps With Free API  [https://app.swaggerhub.com/apis/galihgpr/api-man
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Apabila Anda memiliki saran untuk pengembangan projek ini lebih baik, silahkan push kontibusi anda ke branch baru. Terimakasih 😊
+Push your contribution to the new branch If you have suggestions for development of this project. Thank you 😊
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
