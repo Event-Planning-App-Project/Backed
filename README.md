@@ -77,14 +77,10 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 ![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
 ![Ubuntu](https://img.shields.io/badge/-Ubuntu-05122A?style=flat&logo=ubuntu)&nbsp;
 ![Midtrans](https://img.shields.io/badge/-Midtrans-05122A?style=flat&logo=midtrans)&nbsp;
-![Codacy](https://img.shields.io/badge/-Codacy-05122A?style=flat&logo=codacy)&nbsp;
-![CloudFlare](https://img.shields.io/badge/-CloudFlare-05122A?style=flat&logo=cloudflare)&nbsp;
 ![Google Maps Platform](https://img.shields.io/badge/-Google_Maps_Platform-05122A?style=flat&logo=google)&nbsp;
 ![JWT](https://img.shields.io/badge/-JWT-05122A?style=flat&logo=jwt)&nbsp;
 ![Swagger](https://img.shields.io/badge/-Swagger-05122A?style=flat&logo=swagger)&nbsp;
-![Lucid Chart](https://img.shields.io/badge/-Lucid_Chart-05122A?style=flat&logo=lucidchart)&nbsp;
 
-<img src="images/techstack.png">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -117,16 +113,6 @@ Ensure Golang and mySQL have been installed on your device
  <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-Simulation Apps With Free API  [https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0](https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0)
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -142,10 +128,17 @@ Push your contribution to the new branch If you have suggestions for development
 
 <!-- CONTACT -->
 ## Contact
-* Galih - [https://github.com/galihgpr](https://github.com/galihgpr) 
-* Astuti - [https://github.com/astutirahmawati](https://github.com/astutirahmawati) 
 
-Project Link: [https://github.com/Event-Planning-App-Project/Backend](https://github.com/Event-Planning-App-Project/Backend.git)
+Project Repository Link :  [https://github.com/Event-Planning-App-Project/Backend](https://github.com/Event-Planning-App-Project/Backend.git)<br/>
+Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0](https://app.swaggerhub.com/apis/galihgpr/api-management_event_planning/1.0.0)
+
+<!-- :heart: -->
+<!-- CONTRIBUTOR -->
+
+:star2Contributor :
+<br>
+* [Galih](https://github.com/galihgpr)
+* [Astuti](https://github.com/astutirahmawati)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
