@@ -83,6 +83,6 @@ func (s *SnapMidtrans) FinishPayment(order string) transaction.ResponsePayment {
 
 func PayOk() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		return c.JSON(http.StatusOK, "Pembayaran Berhasil")
+		return c.JSON(http.StatusOK, "Success Pay")
 	}
 }
