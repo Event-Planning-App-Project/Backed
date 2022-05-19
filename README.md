@@ -4,6 +4,7 @@
 <br />
 <div align="center">
  <img src="https://media.giphy.com/media/VPBWxMxTH1VPIp8ogj/giphy.gif" width="250" height="250"/>
+ 
  </div>
  
 
@@ -32,7 +33,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Build App & Database</a></li>
       </ul>
     </li>
     <li>
@@ -41,7 +42,6 @@
        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -84,7 +84,7 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -135,7 +135,7 @@ Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-manageme
 <!-- :heart: -->
 <!-- CONTRIBUTOR -->
 
-:star2Contributor :
+:star2:Contributor :
 <br>
 * [Galih](https://github.com/galihgpr)
 * [Astuti](https://github.com/astutirahmawati)
