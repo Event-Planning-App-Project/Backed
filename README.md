@@ -128,7 +128,7 @@ Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-manageme
 <!-- :heart: -->
 <!-- CONTRIBUTOR -->
 
-:star2:Contributor :
+###:star2:Contributor :
 <br>
 * [Galih](https://github.com/galihgpr)
 [![GitHub Galih](https://img.shields.io/github/followers/galihgpr?label=follow&style=social)](https://github.com/galihgpr)
