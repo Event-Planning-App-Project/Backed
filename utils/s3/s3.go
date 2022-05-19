@@ -15,12 +15,14 @@ import (
 
 func Upload() echo.HandlerFunc {
 	return func(c echo.Context) error {
+		data := c.FormValue("data")
 		file, err := c.FormFile("myFile")
 		if err != nil {
 			fmt.Println(err, "file")
 			return c.JSON(http.StatusForbidden, map[string]interface{}{
 				"Code":    http.StatusForbidden,
 				"Message": "Access Photo Denied",
+				"data":    data,
 			})
 		}
 		src, err := file.Open()
@@ -28,6 +30,7 @@ func Upload() echo.HandlerFunc {
 			return c.JSON(http.StatusForbidden, map[string]interface{}{
 				"Code":    http.StatusForbidden,
 				"Message": "Open Photo Denied",
+				"data":    data,
 			})
 		}
 		defer src.Close()
@@ -36,12 +39,14 @@ func Upload() echo.HandlerFunc {
 			return c.JSON(http.StatusForbidden, map[string]interface{}{
 				"Code":    http.StatusForbidden,
 				"Message": "Upload Photo Denied",
+				"data":    data,
 			})
 		}
 		return c.JSON(http.StatusOK, map[string]interface{}{
 			"Code":    http.StatusOK,
 			"Message": "Upload Photo Success",
 			"Data":    result,
+			"data":    data,
 		})
 	}
 }

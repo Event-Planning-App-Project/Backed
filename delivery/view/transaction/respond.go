@@ -30,12 +30,6 @@ type AllTrans struct {
 	Event       EventTransaction
 }
 
-type ResponsePayment struct {
-	StatusCode        string `json:"status_code"`
-	PaymentType       string `json:"payment_type"`
-	TransactionStatus string `json:"transaction_status"`
-}
-
 func StatusGetAllOk(data []AllTrans) map[string]interface{} {
 	return map[string]interface{}{
 		"code":    http.StatusOK,
