@@ -10,8 +10,8 @@ type RespondEvent struct {
 	Promotor    string `json:"promotor"`
 	Price       int    `json:"price"`
 	Description string `json:"description"`
-	UrlEvent    string `json:"urlEvent"`
 	Quota       int    `json:"quota"`
+	UrlEvent    string `json:"urlEvent"`
 	DateStart   string `json:"dateStart"`
 	DateEnd     string `json:"dateEnd"`
 	TimeStart   string `json:"timeStart"`
