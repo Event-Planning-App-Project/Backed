@@ -56,6 +56,6 @@ func Path(e *echo.Echo, u user.ControllerUser, t transaction.TransController, ca
 	Transaction.GET("/:order_id", t.GetTransactionDetail(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
 	Transaction.POST("/:order_id/pay", t.PayTransaction(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
 	Transaction.POST("/:order_id/cancel", t.CancelTransaction(), middleware.JWTWithConfig(middleware.JWTConfig{SigningKey: []byte("TOGETHER")}))
-	Transaction.GET("/finish_payment", t.FinishPayment())
+	Transaction.POST("/finish_payment", t.FinishPayment())
 	e.POST("/upload", s3.Upload())
 }

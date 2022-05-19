@@ -136,11 +136,14 @@ func (t *ControlTrans) CancelTransaction() echo.HandlerFunc {
 // RESPONSE FINISH
 func (t *ControlTrans) FinishPayment() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		order := c.FormValue("order_id")
-		newStatus := t.midtrans.FinishPayment(order)
+		var callback transV.InsertCallbackSnap
+		if err := c.Bind(&callback); err != nil {
+			log.Warn(err)
+			return c.JSON(http.StatusUnsupportedMediaType, view.BindData())
+		}
+		updateTrans := entities.Transaction{Status: callback.TransactionStatus, PaymentMethod: callback.PaymentType}
 
-		trans := entities.Transaction{PaymentMethod: newStatus.PaymentType, Status: newStatus.TransactionStatus}
-		res, err := t.repo.FinishPayment(order, trans)
+		res, err := t.repo.FinishPayment(callback.OrderID, updateTrans)
 		if err != nil {
 			log.Warn(err)
 			return c.JSON(http.StatusInternalServerError, view.InternalServerError())

@@ -11,3 +11,9 @@ type InsertTransaction struct {
 type InsertStatusTransaction struct {
 	Status string `json:"status" validate:"required"`
 }
+
+type InsertCallbackSnap struct {
+	OrderID           string `json:"order_id"`
+	PaymentType       string `json:"payment_type"`
+	TransactionStatus string `json:"transaction_status"`
+}

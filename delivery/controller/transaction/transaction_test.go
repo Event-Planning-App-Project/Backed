@@ -520,10 +520,6 @@ func (m *MockSnap) CreateTransaction(OrderID string, GrossAmt int64) map[string]
 	return map[string]interface{}{"Token": "HanyaMock"}
 }
 
-func (m *MockSnap) FinishPayment(OrderID string) transaction.ResponsePayment {
-	return transaction.ResponsePayment{TransactionStatus: "Settlement"}
-}
-
 // MOCK ERROR
 type errMockTransaction struct {
 }
@@ -558,8 +554,4 @@ type errMockSnap struct {
 
 func (e *errMockSnap) CreateTransaction(OrderID string, GrossAmt int64) map[string]interface{} {
 	return nil
-}
-
-func (e *errMockSnap) FinishPayment(OrderID string) transaction.ResponsePayment {
-	return transaction.ResponsePayment{}
 }
