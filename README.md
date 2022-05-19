@@ -135,7 +135,7 @@ Project Link: [https://github.com/Event-Planning-App-Project/Backend](https://gi
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-We are very grateful for the help and direction from the mentors and frontend's team in Immersive Altera Academy Batch 8 :pray::pray:
+We are very grateful for suggestion and encouragement from mentors and frontend's team in Immersive Altera Academy Batch 8 Boothcamp :pray::pray:
 
 * [Jerry Young](https://github.com/jackthepanda96)
 * [Nur Fitiana](https://github.com/nurfitriana87)
