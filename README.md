@@ -158,7 +158,7 @@ Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-manageme
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-We are very grateful for suggestion and encouragement from mentors and frontend's team in Immersive Altera Academy Batch 8 Boothcamp :pray::pray:
+We are very grateful for suggestion and encouragement from mentors and frontend's team in Immersive Altera Academy Batch 8 :pray::pray:
 
 * [Jerry Young](https://github.com/jackthepanda96)
 * [Nur Fitiana](https://github.com/nurfitriana87)
