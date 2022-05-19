@@ -1,9 +1,7 @@
 package rds
 
 import (
-	"event/config"
 	"event/entities"
-	"fmt"
 
 	"github.com/labstack/gommon/log"
 	"gorm.io/driver/mysql"
@@ -11,15 +9,16 @@ import (
 )
 
 func InitDB() *gorm.DB {
-	config := config.InitConfig()
+	// config := config.InitConfig()
 
-	conString := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True",
-		config.Username,
-		config.Password,
-		config.Address,
-		config.DB_Port,
-		config.Name,
-	)
+	// conString := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True",
+	// 	config.Username,
+	// 	config.Password,
+	// 	config.Address,
+	// 	config.DB_Port,
+	// 	config.Name,
+	// )
+	conString := "root@tcp(localhost:3306)/Eventku?charset=utf8mb4&parseTime=True"
 
 	db, err := gorm.Open(mysql.Open(conString), &gorm.Config{})
 	if err != nil {

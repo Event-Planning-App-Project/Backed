@@ -2,9 +2,7 @@ package s3
 
 import (
 	"event/config"
-	"fmt"
 	"mime/multipart"
-	"net/http"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -13,42 +11,9 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func Upload() echo.HandlerFunc {
-	return func(c echo.Context) error {
-		data := c.FormValue("data")
-		file, err := c.FormFile("myFile")
-		if err != nil {
-			fmt.Println(err, "file")
-			return c.JSON(http.StatusForbidden, map[string]interface{}{
-				"Code":    http.StatusForbidden,
-				"Message": "Access Photo Denied",
-				"data":    data,
-			})
-		}
-		src, err := file.Open()
-		if err != nil {
-			return c.JSON(http.StatusForbidden, map[string]interface{}{
-				"Code":    http.StatusForbidden,
-				"Message": "Open Photo Denied",
-				"data":    data,
-			})
-		}
-		defer src.Close()
-		result, err := UploadToS3(c, file.Filename, src)
-		if err != nil {
-			return c.JSON(http.StatusForbidden, map[string]interface{}{
-				"Code":    http.StatusForbidden,
-				"Message": "Upload Photo Denied",
-				"data":    data,
-			})
-		}
-		return c.JSON(http.StatusOK, map[string]interface{}{
-			"Code":    http.StatusOK,
-			"Message": "Upload Photo Success",
-			"Data":    result,
-			"data":    data,
-		})
-	}
+type Cek struct {
+	Name     string `json:"name"`
+	Promotor string `json:"promotor"`
 }
 
 func ConnectAws() *session.Session {

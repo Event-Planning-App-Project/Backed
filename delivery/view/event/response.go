@@ -55,3 +55,11 @@ func StatusUpdate(data interface{}) map[string]interface{} {
 		"data":    data,
 	}
 }
+
+func StatusForbidden() map[string]interface{} {
+	return map[string]interface{}{
+		"Code":    http.StatusForbidden,
+		"Message": "Upload Photo To S3 Denied",
+		"status":  false,
+	}
+}

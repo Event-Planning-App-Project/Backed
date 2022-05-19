@@ -57,3 +57,11 @@ func StatusDelete() map[string]interface{} {
 		"status":  true,
 	}
 }
+
+func NotSupported() map[string]interface{} {
+	return map[string]interface{}{
+		"code":    http.StatusUnsupportedMediaType,
+		"message": "File Cannot To Read",
+		"status":  false,
+	}
+}

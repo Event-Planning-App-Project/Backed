@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 )
 
@@ -48,7 +47,6 @@ func initConfig() *AppConfig {
 
 func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
-		fmt.Println(value)
 		return value
 	}
 

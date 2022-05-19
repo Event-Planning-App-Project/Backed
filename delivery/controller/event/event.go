@@ -1,11 +1,13 @@
 package event
 
 import (
+	"encoding/json"
 	middlewares "event/delivery/middleware"
 	"event/delivery/view"
 	evV "event/delivery/view/event"
 	"event/entities"
 	"event/repository/event"
+	"event/utils/s3"
 	"net/http"
 	"strconv"
 
@@ -30,14 +32,30 @@ func NewControlEvent(NewCom event.EventRepository, validate *validator.Validate)
 func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var Insert evV.InsertEventRequest
+
+		data := c.FormValue("data")
+		json.Unmarshal([]byte(data), &Insert)
 		if err := c.Bind(&Insert); err != nil {
 			log.Warn(err)
 			return c.JSON(http.StatusUnsupportedMediaType, view.BindData())
 		}
-
 		if err := e.Valid.Struct(&Insert); err != nil {
 			log.Warn(err)
 			return c.JSON(http.StatusNotAcceptable, view.Validate())
+		}
+
+		file, err := c.FormFile("myFile")
+		if err != nil {
+			return c.JSON(http.StatusNotFound, view.NotFound())
+		}
+		src, err := file.Open()
+		if err != nil {
+			return c.JSON(http.StatusUnsupportedMediaType, view.NotSupported())
+		}
+		defer src.Close()
+		result, err := s3.UploadToS3(c, file.Filename, src)
+		if err != nil {
+			return c.JSON(http.StatusForbidden, evV.StatusForbidden())
 		}
 		UserID := middlewares.ExtractTokenUserId(c)
 		NewAdd := entities.Event{
@@ -48,30 +66,31 @@ func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 			Price:       Insert.Price,
 			Description: Insert.Description,
 			Quota:       Insert.Quota,
+			UrlEvent:    result,
 			DateStart:   Insert.DateStart,
 			DateEnd:     Insert.DateEnd,
 			TimeStart:   Insert.TimeStart,
 			TimeEnd:     Insert.TimeEnd,
 		}
-		result, errCreate := e.Repo.CreateEvent(NewAdd)
-		respond := evV.RespondEvent{
-			EventID:     result.ID,
-			UserID:      result.UserID,
-			CategoryID:  result.CategoryID,
-			Name:        result.Name,
-			Promotor:    result.Promotor,
-			Price:       result.Price,
-			Description: result.Description,
-			Quota:       result.Quota,
-			UrlEvent:    result.UrlEvent,
-			DateStart:   result.DateStart,
-			DateEnd:     result.DateEnd,
-			TimeStart:   result.TimeStart,
-			TimeEnd:     result.TimeEnd,
-		}
+		NewEvent, errCreate := e.Repo.CreateEvent(NewAdd)
 		if errCreate != nil {
 			log.Warn(errCreate)
 			return c.JSON(http.StatusInternalServerError, view.InternalServerError())
+		}
+		respond := evV.RespondEvent{
+			EventID:     NewEvent.ID,
+			UserID:      NewEvent.UserID,
+			CategoryID:  NewEvent.CategoryID,
+			Name:        NewEvent.Name,
+			Promotor:    NewEvent.Promotor,
+			Price:       NewEvent.Price,
+			Description: NewEvent.Description,
+			Quota:       NewEvent.Quota,
+			UrlEvent:    NewEvent.UrlEvent,
+			DateStart:   NewEvent.DateStart,
+			DateEnd:     NewEvent.DateEnd,
+			TimeStart:   NewEvent.TimeStart,
+			TimeEnd:     NewEvent.TimeEnd,
 		}
 		return c.JSON(http.StatusCreated, evV.StatusCreate(respond))
 	}
