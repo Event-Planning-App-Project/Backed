@@ -55,6 +55,7 @@ func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 		}
 		result, errCreate := e.Repo.CreateEvent(NewAdd)
 		respond := evV.RespondEvent{
+			EventID:     result.ID,
 			UserID:      result.UserID,
 			CategoryID:  result.CategoryID,
 			Name:        result.Name,
@@ -87,6 +88,7 @@ func (e *ControlEvent) GetAllEvent() echo.HandlerFunc {
 		var respond []evV.RespondEvent
 		for _, v := range result {
 			res := evV.RespondEvent{
+				EventID:     v.ID,
 				UserID:      v.UserID,
 				CategoryID:  v.CategoryID,
 				Name:        v.Name,
@@ -121,6 +123,7 @@ func (e *ControlEvent) GetEventID() echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, view.NotFound())
 		}
 		respond := evV.RespondEvent{
+			EventID:     result.ID,
 			UserID:      result.UserID,
 			CategoryID:  result.CategoryID,
 			Name:        result.Name,
@@ -172,6 +175,7 @@ func (e *ControlEvent) UpdateEvent() echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, view.NotFound())
 		}
 		respond := evV.RespondEvent{
+			EventID:     result.ID,
 			UserID:      result.UserID,
 			CategoryID:  result.CategoryID,
 			Name:        result.Name,
