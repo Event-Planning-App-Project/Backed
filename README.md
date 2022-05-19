@@ -62,14 +62,31 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 * Deployment
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-:star2: Built With
 
+### :star2:&nbsp;Build App & Database
 
-This project requires several installations such as:
-* [Vs Code](https://code.visualstudio.com/)
-* [Insomnia](https://insomnia.rest/)
-* [Dbeaver](https://dbeaver.io/)
-* [Golang](https://go.dev/)
+![JSON](https://img.shields.io/badge/-JSON-05122A?style=flat&logo=json&logoColor=000000)&nbsp;
+![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)&nbsp;
+![Visual Studio Code](https://img.shields.io/badge/-Visual%20Studio%20Code-05122A?style=flat&logo=visual-studio-code&logoColor=007ACC)&nbsp;
+![MySQL](https://img.shields.io/badge/-MySQL-05122A?style=flat&logo=mysql&logoColor=4479A1)&nbsp;
+![Golang](https://img.shields.io/badge/-Golang-05122A?style=flat&logo=go&logoColor=4479A1)&nbsp;
+![Echo](https://img.shields.io/badge/-Echo-05122A?style=flat&logo=go)&nbsp;
+![Gorm](https://img.shields.io/badge/-Gorm-05122A?style=flat&logo=go)&nbsp;
+![AWS](https://img.shields.io/badge/-AWS-05122A?style=flat&logo=amazon)&nbsp;
+![Insomnia](https://img.shields.io/badge/-Insomnia-05122A?style=flat&logo=insomnia)&nbsp;
+![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
+![Ubuntu](https://img.shields.io/badge/-Ubuntu-05122A?style=flat&logo=ubuntu)&nbsp;
+![Midtrans](https://img.shields.io/badge/-Midtrans-05122A?style=flat&logo=midtrans)&nbsp;
+![Codacy](https://img.shields.io/badge/-Codacy-05122A?style=flat&logo=codacy)&nbsp;
+![CloudFlare](https://img.shields.io/badge/-CloudFlare-05122A?style=flat&logo=cloudflare)&nbsp;
+![Google Maps Platform](https://img.shields.io/badge/-Google_Maps_Platform-05122A?style=flat&logo=google)&nbsp;
+![JWT](https://img.shields.io/badge/-JWT-05122A?style=flat&logo=jwt)&nbsp;
+![Swagger](https://img.shields.io/badge/-Swagger-05122A?style=flat&logo=swagger)&nbsp;
+![Lucid Chart](https://img.shields.io/badge/-Lucid_Chart-05122A?style=flat&logo=lucidchart)&nbsp;
+
+<img src="images/techstack.png">
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
