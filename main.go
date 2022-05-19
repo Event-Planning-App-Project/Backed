@@ -1,8 +1,8 @@
 package main
 
 import (
-	"event/config"
 	"event/utils/midtrans"
+	"event/utils/rds"
 
 	controllercat "event/delivery/controller/category"
 	catRepo "event/repository/category"
@@ -27,9 +27,8 @@ import (
 
 func main() {
 	// Get Access Database
-	database := config.InitDB()
-	config.Migrate()
-
+	database := rds.InitDB()
+	rds.Migrate()
 	userRepo := userRepo.New(database)
 	userControl := controllerus.New(userRepo, validator.New())
 

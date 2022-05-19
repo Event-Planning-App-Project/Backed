@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"event/config"
 	"event/delivery/view/transaction"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
 
+	"github.com/labstack/echo/v4"
 	"github.com/midtrans/midtrans-go"
 	"github.com/midtrans/midtrans-go/snap"
 )
@@ -19,8 +21,10 @@ type SnapMidtrans struct {
 }
 
 func InitMidtrans() *SnapMidtrans {
+	config := config.InitConfig()
+	TokenMidtrans := config.TokenMidtrans
 	s := snap.Client{}
-	s.New("SB-Mid-server-nGfXwNfyjsswvICsgNEjTaVy", midtrans.Sandbox)
+	s.New(TokenMidtrans, midtrans.Sandbox)
 	return &SnapMidtrans{
 		s: s,
 	}
@@ -33,7 +37,7 @@ func (s *SnapMidtrans) CreateTransaction(OrderID string, GrossAmt int64) map[str
 			GrossAmt: GrossAmt,
 		},
 		Callbacks: &snap.Callbacks{
-			Finish: fmt.Sprintf("http://54.179.30.163:8080/transaction/finish_payment"),
+			Finish: ("http://54.179.30.163:8050/transaction/finish_payment"),
 		},
 	}
 	jsonReq, _ := json.Marshal(requestBody)
@@ -75,4 +79,10 @@ func (s *SnapMidtrans) FinishPayment(order string) transaction.ResponsePayment {
 	body, err := ioutil.ReadAll(res.Body)
 	json.Unmarshal(body, &response)
 	return response
+}
+
+func PayOk() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return c.JSON(http.StatusOK, "Success Pay")
+	}
 }

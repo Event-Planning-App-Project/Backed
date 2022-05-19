@@ -47,7 +47,6 @@ func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 			Promotor:    Insert.Promotor,
 			Price:       Insert.Price,
 			Description: Insert.Description,
-			UrlEvent:    Insert.UrlEvent,
 			Quota:       Insert.Quota,
 			DateStart:   Insert.DateStart,
 			DateEnd:     Insert.DateEnd,

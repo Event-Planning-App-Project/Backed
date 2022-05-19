@@ -1,6 +1,7 @@
-package config
+package rds
 
 import (
+	"event/config"
 	"event/entities"
 	"fmt"
 
@@ -10,7 +11,7 @@ import (
 )
 
 func InitDB() *gorm.DB {
-	config := InitConfig()
+	config := config.InitConfig()
 
 	conString := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True",
 		config.Username,
@@ -28,5 +29,5 @@ func InitDB() *gorm.DB {
 }
 func Migrate() {
 	db := InitDB()
-	db.AutoMigrate(&entities.User{}, &entities.Category{}, entities.Transaction{}, entities.Comment{})
+	db.AutoMigrate(&entities.User{}, &entities.Category{}, entities.Transaction{}, entities.Comment{}, entities.Event{})
 }

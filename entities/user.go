@@ -6,10 +6,11 @@ import (
 
 type User struct {
 	gorm.Model
-	Username    string        `json:"username"`
+	Username    string        `json:"username" gorm:"unique"`
 	Email       string        `json:"email" gorm:"unique"`
 	Password    string        `json:"password" form:"password"`
-	Event       []Event       `gorm:"foreignKey:user_id"`
-	Transaction []Transaction `gorm:"foreignKey:User_id"`
-	Comment     []Comment     `gorm:"foreignKey:User_id"`
+	Event       []Event       `gorm:"foreignKey:UserID;references:id"`
+	Transaction []Transaction `gorm:"foreignKey:UserID;references:id"`
+	Comment     []Comment     `gorm:"foreignKey:UserID;references:id"`
+	Category    []Category    `gorm:"foreignKey:UserID;references:id"`
 }
