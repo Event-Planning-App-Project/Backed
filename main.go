@@ -28,7 +28,6 @@ import (
 func main() {
 	// Get Access Database
 	database := rds.InitDB()
-	rds.Migrate()
 	userRepo := userRepo.New(database)
 	userControl := controllerus.New(userRepo, validator.New())
 
