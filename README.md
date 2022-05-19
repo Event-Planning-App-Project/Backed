@@ -87,9 +87,9 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 | 2. | Login          | Authentication process  |
 | 3. | User     | Read & update profile user|
 |     |          | Non activate account  | 
-| 4. | Comment   | create, read, update, and delete comment  |
-| 5. | Event| create, read, update, and delete event   |
-| 6. | Transaction| create, read, update, and delete order |
+| 4. | Comment   | Create, read, update, and delete comment  |
+| 5. | Event| Create, read, update, and delete event   |
+| 6. | Transaction| Create, read, update, and delete order |
 |  | | Create and choose payment method |
 
 
