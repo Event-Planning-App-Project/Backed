@@ -53,7 +53,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is a collaborative project between Backend and Frontend in Immersive Alterra Batch 8 Boothcamp. However, this repo specifically contains cases which are accomplished by Backend's team.
+This project is a collaborative project between Backend and Frontend in Immersive Alterra Batch 8 Boothcamp. However, this repo specifically contains cases which have accomplished by Backend's team.
 Description about this project can be read at the following link --> [Project Description](https://docs.google.com/document/d/1mb8QTb7J77r6rzJwned63H-IVdV20v12ugN365ET9tg/edit).
 This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https://github.com/astutirahmawati). The things that Backend's team has done such as:
 * Resolving Entity Relation Design (ERD)'s together
