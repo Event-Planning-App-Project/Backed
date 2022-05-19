@@ -131,7 +131,9 @@ Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-manageme
 :star2:Contributor :
 <br>
 * [Galih](https://github.com/galihgpr)
+[![GitHub Galih](https://img.shields.io/github/followers/galihgpr?label=follow&style=social)](https://github.com/galihgpr)
 * [Astuti](https://github.com/astutirahmawati)
+[![GitHub Astuti](https://img.shields.io/github/followers/astutirahmawati?label=follow&style=social)](https://github.com/astutirahmawati)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
