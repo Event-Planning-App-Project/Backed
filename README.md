@@ -153,3 +153,7 @@ We are very grateful for suggestion and encouragement from mentors and frontend'
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+<h3>
+<p align="center">:copyright: 2022 | Immersive ALTA Batch 8 </p>
+</h3>
+<!-- end -->
