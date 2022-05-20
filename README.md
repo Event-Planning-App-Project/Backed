@@ -97,6 +97,10 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 
 ![ERD](https://github.com/Event-Planning-App-Project/Backend/blob/main/ERD_EVENT.png)
 
+### :star2:&nbsp;TESTING
+
+![ERD](https://github.com/Event-Planning-App-Project/Backend/blob/main/Testing.png)
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
