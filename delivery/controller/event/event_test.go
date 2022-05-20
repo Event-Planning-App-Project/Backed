@@ -171,6 +171,52 @@ func TestCreateEvent(t *testing.T) {
 		assert.Equal(t, "Validate Error", result.Message)
 		assert.False(t, result.Status)
 	})
+	t.Run("Error Access File", func(t *testing.T) {
+		e := echo.New()
+		requestBody, _ := json.Marshal(map[string]interface{}{
+			"category_id": 1,
+			"name":        "Kahitna Live Music",
+			"promotor":    "j Entertaiment",
+			"price":       120000,
+			"description": "live music",
+			"quota":       100,
+			"dateStart":   "2022-05-18",
+			"dateEnd":     "2022-05-29",
+			"timeStart":   "17.00",
+			"timeEnd":     "21.00",
+		})
+		data := string(requestBody)
+		body := new(bytes.Buffer)
+		writer := multipart.NewWriter(body)
+		writer.WriteField("data", data)
+
+		writer.Close() // <<< important part
+
+		req := httptest.NewRequest(http.MethodPost, "/", body)
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
+		req.Header.Set("Content-Type", writer.FormDataContentType()) // <<< important part
+
+		res := httptest.NewRecorder()
+		context := e.NewContext(req, res)
+		context.SetPath("/event")
+		eventC := NewControlEvent(&errMockEvent{}, validator.New())
+
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(eventC.CreateEvent())(context)
+
+		type Response struct {
+			Code    int
+			Message string
+			Status  bool
+		}
+
+		var result Response
+		json.Unmarshal([]byte(res.Body.Bytes()), &result)
+
+		assert.Equal(t, 404, result.Code)
+		assert.Equal(t, "Data Not Found", result.Message)
+		assert.False(t, result.Status)
+	})
 }
 
 func TestGetAllEvent(t *testing.T) {

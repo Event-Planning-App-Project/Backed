@@ -28,7 +28,7 @@ func (t *TransDB) CreateTransaction(NewTransaction entities.Transaction) (entiti
 		return NewTransaction, err
 	}
 	OrderID := fmt.Sprintf("Order-%d%d", NewTransaction.UserID, NewTransaction.ID)
-	if err := t.Db.Where("id = ?", transaction.ID).Update("order_id", OrderID).Error; err != nil {
+	if err := t.Db.Table("transactions").Where("id = ?", transaction.ID).Update("order_id", OrderID).Error; err != nil {
 		log.Warn(err)
 	}
 	return NewTransaction, nil
