@@ -9,12 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/gommon/log"
 )
-
-type Cek struct {
-	Name     string `json:"name"`
-	Promotor string `json:"promotor"`
-}
 
 func ConnectAws() *session.Session {
 	configuration := config.InitConfig()
@@ -32,13 +28,12 @@ func ConnectAws() *session.Session {
 			),
 		})
 	if err != nil {
-		panic(err)
+		log.Warn("Error Access S3")
 	}
 	return sess
 }
 
 func UploadToS3(c echo.Context, filename string, src multipart.File) (string, error) {
-	logger := c.Logger()
 	sess := ConnectAws()
 
 	uploader := s3manager.NewUploader(sess)
@@ -48,7 +43,7 @@ func UploadToS3(c echo.Context, filename string, src multipart.File) (string, er
 		Body:   src,
 	})
 	if err != nil {
-		logger.Fatal(err)
+		log.Warn(err)
 		return "", err
 	}
 

@@ -35,10 +35,7 @@ func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 
 		data := c.FormValue("data")
 		json.Unmarshal([]byte(data), &Insert)
-		if err := c.Bind(&Insert); err != nil {
-			log.Warn(err)
-			return c.JSON(http.StatusUnsupportedMediaType, view.BindData())
-		}
+
 		if err := e.Valid.Struct(&Insert); err != nil {
 			log.Warn(err)
 			return c.JSON(http.StatusNotAcceptable, view.Validate())
@@ -46,17 +43,17 @@ func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 
 		file, err := c.FormFile("myFile")
 		if err != nil {
+			log.Warn(err)
 			return c.JSON(http.StatusNotFound, view.NotFound())
 		}
 		src, err := file.Open()
 		if err != nil {
+			log.Warn(err)
 			return c.JSON(http.StatusUnsupportedMediaType, view.NotSupported())
 		}
 		defer src.Close()
-		result, err := s3.UploadToS3(c, file.Filename, src)
-		if err != nil {
-			return c.JSON(http.StatusForbidden, evV.StatusForbidden())
-		}
+		result, _ := s3.UploadToS3(c, file.Filename, src)
+
 		UserID := middlewares.ExtractTokenUserId(c)
 		NewAdd := entities.Event{
 			UserID:      uint(UserID),

@@ -1,10 +1,12 @@
 package event
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	middlewares "event/delivery/middleware"
 	"event/entities"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -34,17 +36,24 @@ func TestCreateEvent(t *testing.T) {
 			"promotor":    "j Entertaiment",
 			"price":       120000,
 			"description": "live music",
-			"urlEvent":    "yiyyiuiuiu",
 			"quota":       100,
 			"dateStart":   "2022-05-18",
 			"dateEnd":     "2022-05-29",
 			"timeStart":   "17.00",
 			"timeEnd":     "21.00",
 		})
+		data := string(requestBody)
+		body := new(bytes.Buffer)
+		writer := multipart.NewWriter(body)
+		writer.WriteField("data", data)
+		part, _ := writer.CreateFormFile("myFile", "file.txt")
+		part.Write([]byte(`myFile`))
+		writer.Close() // <<< important part
 
-		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
+		req := httptest.NewRequest(http.MethodPost, "/", body)
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
+		req.Header.Set("Content-Type", writer.FormDataContentType()) // <<< important part
 
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
@@ -76,16 +85,25 @@ func TestCreateEvent(t *testing.T) {
 			"promotor":    "j Entertaiment",
 			"price":       120000,
 			"description": "live music",
-			"urlEvent":    "yiyyiuiuiu",
 			"quota":       100,
 			"dateStart":   "2022-05-18",
 			"dateEnd":     "2022-05-29",
 			"timeStart":   "17.00",
 			"timeEnd":     "21.00",
 		})
-		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
+		data := string(requestBody)
+		body := new(bytes.Buffer)
+		writer := multipart.NewWriter(body)
+		writer.WriteField("data", data)
+		part, _ := writer.CreateFormFile("myFile", "file.txt")
+		part.Write([]byte(`myFile`))
+		writer.Close() // <<< important part
+
+		req := httptest.NewRequest(http.MethodPost, "/", body)
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
+		req.Header.Set("Content-Type", writer.FormDataContentType()) // <<< important part
+
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
 		context.SetPath("/event")
@@ -106,51 +124,33 @@ func TestCreateEvent(t *testing.T) {
 		assert.Equal(t, "Cannot Access Database", result.Message)
 		assert.False(t, result.Status)
 	})
-	t.Run("Error Bind", func(t *testing.T) {
-		e := echo.New()
-
-		requestBody := "kecantikan"
-
-		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
-		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
-		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
-		res := httptest.NewRecorder()
-		context := e.NewContext(req, res)
-		context.SetPath("/event")
-		eventC := NewControlEvent(&errMockEvent{}, validator.New())
-
-		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(eventC.CreateEvent())(context)
-
-		type Response struct {
-			Code    int
-			Message string
-			Status  bool
-		}
-
-		var result Response
-		json.Unmarshal([]byte(res.Body.Bytes()), &result)
-		assert.Equal(t, 415, result.Code)
-		assert.Equal(t, "Cannot Bind Data", result.Message)
-		assert.False(t, result.Status)
-	})
 	t.Run("Error Validate", func(t *testing.T) {
 		e := echo.New()
 		requestBody, _ := json.Marshal(map[string]interface{}{
+			"category_id": "c",
 			"name":        "Kahitna Live Music",
 			"promotor":    "j Entertaiment",
 			"price":       120000,
 			"description": "live music",
-			"url_event":   "yiyyiuiuiu",
 			"quota":       100,
 			"dateStart":   "2022-05-18",
 			"dateEnd":     "2022-05-29",
 			"timeStart":   "17.00",
 			"timeEnd":     "21.00",
 		})
+		data := string(requestBody)
+		body := new(bytes.Buffer)
+		writer := multipart.NewWriter(body)
+		writer.WriteField("data", data)
+		part, _ := writer.CreateFormFile("myFile", "file.txt")
+		part.Write([]byte(`myFile`))
+		writer.Close() // <<< important part
 
-		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
+		req := httptest.NewRequest(http.MethodPost, "/", body)
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
+		req.Header.Set("Content-Type", writer.FormDataContentType()) // <<< important part
+
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
 		context.SetPath("/event")
@@ -551,6 +551,10 @@ func (c *mockEvent) DeleteEvent(id uint, UserID uint) error {
 	return nil
 }
 
+func (c *mockEvent) UploadToS3(e echo.Context, filename string, src multipart.File) (string, error) {
+	return "Succes Uplaod S3", nil
+}
+
 type errMockEvent struct {
 }
 
@@ -573,4 +577,8 @@ func (e *errMockEvent) UpdateEvent(id uint, UpdateEvent entities.Event, UserID u
 
 func (e *errMockEvent) DeleteEvent(id uint, UserID uint) error {
 	return errors.New("Access Database Error")
+}
+
+func (e *errMockEvent) UploadToS3(c echo.Context, filename string, src multipart.File) (string, error) {
+	return "", errors.New("Upload S3 Error")
 }
