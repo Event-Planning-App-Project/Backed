@@ -27,6 +27,8 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Build App & Database</a></li>
+       <li><a href="#built-with">List of Features</a></li>
+       <li><a href="#built-with">ERD</a></li>
       </ul>
     </li>
     <li>
@@ -48,7 +50,7 @@
 
 This project is a collaborative project between Backend and Frontend in Immersive Alterra Batch 8 Boothcamp. However, this repo specifically contains cases which have accomplished by Backend's team.
 Description about this project can be read at the following link --> [Project Description](https://docs.google.com/document/d/1mb8QTb7J77r6rzJwned63H-IVdV20v12ugN365ET9tg/edit).
-This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https://github.com/astutirahmawati). The things that Backend's team has done such as:
+This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https://github.com/astutirahmawati). Backend's team has done such as:
 * Designing Entity Relation Design (ERD)'s together
 * Finishing OPEN API's carried out by division of tasks
 * Resolving from coding endpoint to unit test's carried out by division of tasks
@@ -70,7 +72,6 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 ![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
 ![Ubuntu](https://img.shields.io/badge/-Ubuntu-05122A?style=flat&logo=ubuntu)&nbsp;
 ![Midtrans](https://img.shields.io/badge/-Midtrans-05122A?style=flat&logo=midtrans)&nbsp;
-![Google Maps Platform](https://img.shields.io/badge/-Google_Maps_Platform-05122A?style=flat&logo=google)&nbsp;
 ![JWT](https://img.shields.io/badge/-JWT-05122A?style=flat&logo=jwt)&nbsp;
 ![Swagger](https://img.shields.io/badge/-Swagger-05122A?style=flat&logo=swagger)&nbsp;
 
@@ -78,6 +79,23 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+### :star2:&nbsp;List of Features
+
+| No.| Endpoint        | Description                                                            |
+| :- | :------------- | :--------------------------------------------------------------------- |
+| 1. | Register       | Create new account  |
+| 2. | Login          | Authentication process  |
+| 3. | User     | Read & update profile user|
+|     |          | Non activate account  | 
+| 4. | Comment   | Create, read, update, and delete comment  |
+| 5. | Event| Create, read, update, and delete event   |
+| 6. | Transaction| Create, read, update, and delete order |
+|  | | Create and choose payment method |
+
+
+### :star2:&nbsp;ERD
+
+![ERD](https://github.com/Event-Planning-App-Project/Backend/blob/main/ERD_EVENT.png)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -109,7 +127,7 @@ Ensure Golang and mySQL have been installed on your device
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Push your contribution to the new branch If you have suggestions for development of this project. Thank you 😊
+Push your contribution to new branch If you have suggestions for development of this project. Thank you 😊
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -140,7 +158,7 @@ Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-manageme
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-We are very grateful for suggestion and encouragement from mentors and frontend's team in Immersive Altera Academy Batch 8 Boothcamp :pray::pray:
+We are very grateful for suggestion and encouragement from mentors and frontend's team in Immersive Altera Academy Batch 8 :pray::pray:
 
 * [Jerry Young](https://github.com/jackthepanda96)
 * [Nur Fitiana](https://github.com/nurfitriana87)
