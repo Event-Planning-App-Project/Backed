@@ -29,6 +29,7 @@
         <li><a href="#built-with">Build App & Database</a></li>
        <li><a href="#built-with">List of Features</a></li>
        <li><a href="#built-with">ERD</a></li>
+        <li><a href="#built-with">Testing</a></li>
       </ul>
     </li>
     <li>
@@ -97,7 +98,7 @@ This repo's resolved by [Galih](https://github.com/galihgpr) and [Astuti](https:
 
 ![ERD](https://github.com/Event-Planning-App-Project/Backend/blob/main/ERD_EVENT.png)
 
-### :star2:&nbsp;TESTING
+### :star2:&nbsp;Testing
 
 ![ERD](https://github.com/Event-Planning-App-Project/Backend/blob/main/Testing.png)
 
