@@ -53,7 +53,10 @@ func (e *ControlEvent) CreateEvent() echo.HandlerFunc {
 		}
 		defer src.Close()
 		result, _ := s3.UploadToS3(c, file.Filename, src)
-
+		if err != nil {
+			log.Warn(err)
+			return c.JSON(http.StatusForbidden, evV.StatusForbidden())
+		}
 		UserID := middlewares.ExtractTokenUserId(c)
 		NewAdd := entities.Event{
 			UserID:      uint(UserID),

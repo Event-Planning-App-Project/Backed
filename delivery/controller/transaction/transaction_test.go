@@ -434,13 +434,17 @@ func TestCancelTransaction(t *testing.T) {
 func TestFinishPayment(t *testing.T) {
 	t.Run("Success Update Transaction", func(t *testing.T) {
 		e := echo.New()
-
-		req := httptest.NewRequest(http.MethodGet, "/", nil)
+		requestBody, _ := json.Marshal(map[string]interface{}{
+			"order_id":           "order-1",
+			"payment_type":       "transfer",
+			"transaction_status": "settlement",
+		})
+		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/transaction?order_id=order-123/finish_payment")
+		context.SetPath("/transaction/finish_payment")
 
 		GetTransaction := NewRepoTrans(&mockTransaction{}, validator.New(), &MockSnap{})
 		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(GetTransaction.FinishPayment())(context)
@@ -461,12 +465,17 @@ func TestFinishPayment(t *testing.T) {
 	t.Run("Error Finish Transaction", func(t *testing.T) {
 		e := echo.New()
 
-		req := httptest.NewRequest(http.MethodGet, "/", nil)
+		requestBody, _ := json.Marshal(map[string]interface{}{
+			"order_id":           "order-1",
+			"payment_type":       "transfer",
+			"transaction_status": "settlement",
+		})
+		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(string(requestBody)))
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
 		res := httptest.NewRecorder()
 		context := e.NewContext(req, res)
-		context.SetPath("/transaction?order_id=order-123/finish_payment")
+		context.SetPath("/transaction/finish_payment")
 
 		GetTransaction := NewRepoTrans(&errMockTransaction{}, validator.New(), &MockSnap{})
 
@@ -483,6 +492,31 @@ func TestFinishPayment(t *testing.T) {
 
 		assert.Equal(t, 500, result.Code)
 		assert.Equal(t, "Cannot Access Database", result.Message)
+		assert.False(t, result.Status)
+	})
+	t.Run("Error Bind", func(t *testing.T) {
+		e := echo.New()
+		requestBody := "Error Access"
+		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(requestBody))
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		req.Header.Set(echo.HeaderAuthorization, "Bearer "+token)
+		res := httptest.NewRecorder()
+		context := e.NewContext(req, res)
+		context.SetPath("/transaction/finish_payment")
+		TransactionC := NewRepoTrans(&errMockTransaction{}, validator.New(), &MockSnap{})
+
+		middleware.JWTWithConfig(middleware.JWTConfig{SigningMethod: "HS256", SigningKey: []byte("TOGETHER")})(TransactionC.FinishPayment())(context)
+
+		type Response struct {
+			Code    int
+			Message string
+			Status  bool
+		}
+
+		var result Response
+		json.Unmarshal([]byte(res.Body.Bytes()), &result)
+		assert.Equal(t, 415, result.Code)
+		assert.Equal(t, "Cannot Bind Data", result.Message)
 		assert.False(t, result.Status)
 	})
 }
