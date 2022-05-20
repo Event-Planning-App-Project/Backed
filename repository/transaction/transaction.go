@@ -22,16 +22,13 @@ func NewTransDB(DB *gorm.DB) *TransDB {
 
 // CREATE NEW TRANSACTION
 func (t *TransDB) CreateTransaction(NewTransaction entities.Transaction) (entities.Transaction, error) {
-	var transaction entities.Transaction
-	if err := t.Db.Create(&NewTransaction).Find(&transaction).Error; err != nil {
+	OrderID := fmt.Sprintf("Order-%d%s", NewTransaction.UserID, NewTransaction.Phone)
+	NewTransaction.OrderID = OrderID
+	if err := t.Db.Create(&NewTransaction).Error; err != nil {
 		log.Warn(err)
 		return NewTransaction, err
 	}
-	OrderID := fmt.Sprintf("Order-%d%d", transaction.UserID, transaction.ID)
-	if err := t.Db.Table("transactions").Where("id = ?", transaction.ID).Update("order_id", OrderID).Error; err != nil {
-		log.Warn(err)
-		return NewTransaction, err
-	}
+
 	return NewTransaction, nil
 }
 
