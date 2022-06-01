@@ -155,6 +155,12 @@ Open API Documentation :  [https://app.swaggerhub.com/apis/galihgpr/api-manageme
 <br>
 * [Galih](https://github.com/galihgpr)
 [![GitHub Galih](https://img.shields.io/github/followers/galihgpr?label=follow&style=social)](https://github.com/galihgpr)
+* [Dwi](https://github.com/DwiBactiar12)
+[![GitHub Galih](https://img.shields.io/github/followers/galihgpr?label=follow&style=social)](https://github.com/DwiBactiar12)
+* [Daka](https://github.com/dakasakti)
+[![GitHub Galih](https://img.shields.io/github/followers/galihgpr?label=follow&style=social)](https://github.com/dakasakti)
+* [Galang](https://github.com/adeeplearn)
+[![GitHub Galih](https://img.shields.io/github/followers/galihgpr?label=follow&style=social)](https://github.com/adeeplearn)
 * [Astuti](https://github.com/astutirahmawati)
 [![GitHub Astuti](https://img.shields.io/github/followers/astutirahmawati?label=follow&style=social)](https://github.com/astutirahmawati)
 
